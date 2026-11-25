@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewsFinder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topo">
+    <div class="marca">
+      <h1>News<span>Finder</span></h1>
+      <p>Notícias de várias fontes em um só lugar</p>
+    </div>
+
+    <form id="form-busca" class="busca">
+      <input id="campo-busca" type="search" placeholder="Pesquisar por palavra-chave..." autocomplete="off">
+      <button type="submit">Buscar</button>
+    </form>
+  </header>
+
+  <nav class="categorias" id="categorias">
+    {% for chave, nome in categorias.items() %}
+      <button class="categoria{% if chave == 'todas' %} ativa{% endif %}" data-categoria="{{ chave }}">{{ nome }}</button>
+    {% endfor %}
+    <button class="categoria favoritos" data-categoria="favoritos">★ Favoritos</button>
+  </nav>
+
+  <section class="barra">
+    <span id="status">Carregando notícias...</span>
+    <select id="filtro-fonte">
+      <option value="">Todas as fontes</option>
+    </select>
+  </section>
+
+  <p id="avisos" class="avisos" hidden></p>
+
+  <main id="lista" class="grade"></main>
+
+  <template id="modelo-cartao">
+    <article class="cartao">
+      <a class="imagem" target="_blank" rel="noopener"><img alt="" loading="lazy"></a>
+      <div class="conteudo">
+        <div class="meta">
+          <span class="fonte"></span>
+          <time class="data"></time>
+        </div>
+        <h2 class="titulo"><a target="_blank" rel="noopener"></a></h2>
+        <p class="descricao"></p>
+        <div class="rodape">
+          <a class="abrir" target="_blank" rel="noopener">Ler notícia original →</a>
+          <button class="favoritar" title="Salvar nos favoritos">☆</button>
+        </div>
+        <span class="relevancia" hidden></span>
+      </div>
+    </article>
+  </template>
+
+  <footer class="final">
+    Trabalho de Recuperação de Informação na Web e Redes Sociais — coleta via RSS, busca com TF-IDF.
+  </footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

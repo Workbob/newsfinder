@@ -1,0 +1,160 @@
+:root {
+  --fundo: #f4f5f7;
+  --cartao: #ffffff;
+  --texto: #1d2330;
+  --suave: #667085;
+  --borda: #e3e6eb;
+  --destaque: #1f5eff;
+  --destaque-escuro: #1747c7;
+  --estrela: #f5a623;
+  --raio: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+/* ---------- topo ---------- */
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  background: var(--cartao);
+  border-bottom: 1px solid var(--borda);
+}
+.marca h1 { margin: 0; font-size: 1.8rem; letter-spacing: -0.5px; }
+.marca h1 span { color: var(--destaque); }
+.marca p { margin: 4px 0 0; color: var(--suave); font-size: 0.9rem; }
+
+.busca { display: flex; gap: 8px; flex: 1; max-width: 480px; }
+.busca input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.busca input:focus { outline: 2px solid var(--destaque); border-color: transparent; }
+.busca button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: var(--destaque);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.busca button:hover { background: var(--destaque-escuro); }
+
+/* ---------- categorias ---------- */
+.categorias {
+  display: flex;
+  gap: 8px;
+  padding: 16px 32px;
+  overflow-x: auto;
+}
+.categoria {
+  padding: 8px 16px;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  background: var(--cartao);
+  color: var(--texto);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.categoria:hover { border-color: var(--destaque); }
+.categoria.ativa { background: var(--destaque); border-color: var(--destaque); color: #fff; }
+.categoria.favoritos { margin-left: auto; }
+
+/* ---------- barra de status ---------- */
+.barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 0 32px 12px;
+  color: var(--suave);
+  font-size: 0.9rem;
+}
+.barra select {
+  padding: 6px 10px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--cartao);
+}
+.avisos {
+  margin: 0 32px 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #fff7e6;
+  color: #8a5a00;
+  font-size: 0.85rem;
+}
+
+/* ---------- grade de cartões ---------- */
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0 32px 32px;
+}
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  overflow: hidden;
+  transition: transform .15s, box-shadow .15s;
+}
+.cartao:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(16, 24, 40, .08); }
+
+.cartao .imagem { display: block; aspect-ratio: 16 / 9; background: #e9ecf2; }
+.cartao .imagem img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cartao .imagem.sem-imagem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--suave);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.conteudo { display: flex; flex-direction: column; gap: 8px; padding: 16px; flex: 1; }
+.meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--suave); }
+.fonte { font-weight: 600; color: var(--destaque); }
+.titulo { margin: 0; font-size: 1.05rem; line-height: 1.35; }
+.titulo a { color: inherit; text-decoration: none; }
+.titulo a:hover { text-decoration: underline; }
+.descricao { margin: 0; color: var(--suave); font-size: 0.9rem; line-height: 1.5; flex: 1; }
+
+.rodape { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+.abrir { color: var(--destaque); font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+.favoritar {
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  color: var(--suave);
+  cursor: pointer;
+}
+.favoritar.ativo { color: var(--estrela); }
+.relevancia { font-size: 0.75rem; color: var(--suave); }
+
+.vazio { grid-column: 1 / -1; text-align: center; color: var(--suave); padding: 48px 0; }
+
+.final { text-align: center; color: var(--suave); font-size: 0.8rem; padding: 0 32px 32px; }
+
+@media (max-width: 600px) {
+  .topo, .categorias, .barra, .grade { padding-left: 16px; padding-right: 16px; }
+  .categoria.favoritos { margin-left: 0; }
+}
